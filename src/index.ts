@@ -11,9 +11,16 @@ export class MyMCP extends McpAgent {
 	});
 
 	async init() {
-		this.server.tool("add", { a: z.number(), b: z.number() }, async ({ a, b }) => ({
-			content: [{ type: "text", text: String(a + b) }],
-		}));
+		this.server.tool(
+			"add", { a: z.number(), b: z.number() }, async ({ a, b }) => ({
+				content: [{ type: "text", text: String(a + b) }],
+			}));
+
+		this.server.tool(
+			"calculateBMI", { weightKg: z.number(), heightM: z.number() }, async ({ weightKg, heightM }) => ({
+				content: [{ type: "text", text: String(weightKg / (heightM * heightM)) }],
+			}),
+		);
 	}
 }
 
